@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8"/>
-  <title>Procedural animation</title>
+  <title>First post</title>
   <style>
     * { box-sizing: border-box; }
     body {
@@ -68,28 +68,6 @@
       document.getElementById('content').textContent = 'Failed to load post.';
       console.error(err);
     });
-</script>
-
-<!-- Macroquad WASM bootstrap -->
-<script type="module">
-  async function runMacroquad() {
-    try {
-      // Importuje WASM soubor jako modul, musí být relativní cesta
-      const wasm = await import('./powderclone.wasm');
-
-      // Pokud Macroquad generuje JS bootstrap, můžeš ho importovat také
-      // import init from './powderclone.js';
-      // await init();
-
-      console.log("Macroquad WASM loaded!", wasm);
-
-      // Tady by mohl začít tvůj kód, např. inicializace Macroquadu
-    } catch (err) {
-      console.error("Failed to load WASM:", err);
-    }
-  }
-
-  runMacroquad();
 </script>
 
 </body>
