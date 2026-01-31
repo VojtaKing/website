@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Procedural animation</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      font-family: "Segoe UI", Roboto, system-ui, sans-serif;
+      background: #f9f9f9;
+      color: #222;
+      line-height: 1.7;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1, h2, h3 {
+      color: #111;
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+    }
+    h1 { border-bottom: 3px solid #0077cc; padding-bottom: 0.3em; }
+    h2 { border-bottom: 1px solid #ddd; padding-bottom: 0.2em; }
+    h3 { color: #0077cc; }
+    a { color: #0077cc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { max-width: 100%; border-radius: 6px; margin: 20px 0; }
+    pre {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 14px;
+      border-radius: 6px;
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+    code { background: #eee; padding: 2px 4px; border-radius: 4px; font-family: monospace; }
+    blockquote {
+      border-left: 4px solid #0077cc;
+      padding-left: 12px;
+      color: #555;
+      font-style: italic;
+      margin: 16px 0;
+      background: #f0f4f8;
+      border-radius: 4px;
+      padding: 12px;
+    }
+    ul, ol { padding-left: 1.5em; margin: 1em 0; }
+    table { border-collapse: collapse; width: 100%; margin: 20px 0; }
+    table th, table td { border: 1px solid #ddd; padding: 8px; }
+    table th { background: #f0f0f0; }
+    canvas { display: block; margin: 20px auto; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+
+<div id="content">Loading...</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/lib/marked.umd.js"></script>
+<script>
+  fetch('post.md')
+    .then(res => res.text())
+    .then(md => {
+      document.getElementById('content').innerHTML = marked.parse(md);
+    })
+    .catch(err => {
+      document.getElementById('content').textContent = 'Failed to load post.';
+      console.error(err);
+    });
+</script>
+
+<!-- Macroquad WASM bootstrap -->
+<script type="module">
+  async function runMacroquad() {
+    try {
+      // Importuje WASM soubor jako modul, musí být relativní cesta
+      const wasm = await import('./powderclone.wasm');
+
+      // Pokud Macroquad generuje JS bootstrap, můžeš ho importovat také
+      // import init from './powderclone.js';
+      // await init();
+
+      console.log("Macroquad WASM loaded!", wasm);
+
+      // Tady by mohl začít tvůj kód, např. inicializace Macroquadu
+    } catch (err) {
+      console.error("Failed to load WASM:", err);
+    }
+  }
+
+  runMacroquad();
+</script>
+
+</body>
+</html>
